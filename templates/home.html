@@ -11,9 +11,9 @@
       <h4 class="card-title"><b>Insira o nûmero do jogo e o placar</b></h4>
       
       <div class="mb-4">
-        <form action="submit" method="POST">
+        <form action="submit"  method="POST">
           {% csrf_token %}
-          <input class='form-control col-lg-2 mx-auto text-center'  placeholder="N° do Jogo" name='nJogo' type='text' value="{{ jogo.idJogo }}">
+          <input class='form-control col-lg-2 mx-auto text-center'  placeholder="N° do Jogo" name='nJogo' type='text' >
           <br>
           <input class='form-control col-lg-2 mx-auto text-center'  placeholder="Placar" name='nPlacar' type='text'>
       </div>

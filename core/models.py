@@ -8,6 +8,7 @@ class Jogo(models.Model):
     quebraRecMin = models.IntegerField()
     quebraRecMax = models.IntegerField()
 
+
     def __str__(self):
         return str(self.idJogo)
 

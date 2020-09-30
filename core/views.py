@@ -6,41 +6,38 @@ def home_page(request):
     return render(request, 'home.html')
 
 def consultar(request):
-    jogo = Jogo.objects.filter()
+    jogo = Jogo.objects.all()
     return render (request,'consulta.html',{'jogo':jogo})
 
 def inserir(request):
     idJogo = request.POST.get('nJogo')
     placar = request.POST.get('nPlacar')
     
-    placarMin1 = Jogo.objects.latest('placarMin').placarMin
-    placarMax1 = Jogo.objects.latest('placarMax').placarMax
-    quebraRecMin1 = Jogo.objects.latest('quebraRecMin').quebraRecMin
-    quebraRecMax1 = Jogo.objects.latest('quebraRecMax').quebraRecMax
     
-    placar1 = int(placar)
-    placarMin = int(placarMin1)
-    placarMax = int(placarMax1)
-    quebraRecMin = int(quebraRecMin1)
-    quebraRecMax = int(quebraRecMax1)
+
+    placarMax = Jogo.objects.latest('placarMax').placarMax
+    quebraRecMin = Jogo.objects.latest('quebraRecMin').quebraRecMin
+    quebraRecMax = Jogo.objects.latest('quebraRecMax').quebraRecMax
+    placarMin = Jogo.objects.latest('placarMin').placarMin
+    
+    placar = int(placar)
+    placarMin = int(placarMin)
+    placarMax = int(placarMax)
+    quebraRecMin = int(quebraRecMin)
+    quebraRecMax = int(quebraRecMax)
 
 
 
-
-    if placar1 > placarMax:
-        placarMax = placar1
-        quebraRecMax = quebraRecMax+1
-        placarMin = placarMin
-    elif placar1 < placarMin:
-        placarMin = placar1
-        quebraRecMin = quebraRecMin+ 1
+    if placar > placarMax:
+        placarMax = placar
+        quebraRecMax = quebraRecMax + 1
+        
+    elif placar < placarMin:
+        placarMin = placar
+        quebraRecMin = quebraRecMin + 1
     else:
         quebraRecMin = quebraRecMin+ 0 
         quebraRecMmax =quebraRecMax+ 0     
-
-
-   
-    jogo = Jogo.objects.create(idJogo=idJogo,placar=placar,placarMin=placarMin,placarMax=placarMax,quebraRecMin=quebraRecMin,quebraRecMax=quebraRecMax)
-    jogo.save()
-    
-    return redirect('/')   
+        
+    jogo = Jogo.objects.create(placarMin=placarMin,idJogo=idJogo,placar=placar,placarMax=placarMax,quebraRecMin=quebraRecMin,quebraRecMax=quebraRecMax)
+    return redirect('/')  
