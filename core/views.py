@@ -13,17 +13,34 @@ def inserir(request):
     idJogo = request.POST.get('nJogo')
     placar = request.POST.get('nPlacar')
     
-    placarMin1 = Jogo.objects.last(placarMin)
-    print(placarMin1)
+    placarMin1 = Jogo.objects.latest('placarMin').placarMin
+    placarMax1 = Jogo.objects.latest('placarMax').placarMax
+    quebraRecMin1 = Jogo.objects.latest('quebraRecMin').quebraRecMin
+    quebraRecMax1 = Jogo.objects.latest('quebraRecMax').quebraRecMax
+    
+    placar1 = int(placar)
     placarMin = int(placarMin1)
-    placar = int(placar)
+    placarMax = int(placarMax1)
+    quebraRecMin = int(quebraRecMin1)
+    quebraRecMax = int(quebraRecMax1)
 
-    if placar < placarMin:
-        placarMin = placar
+
+
+
+    if placar1 > placarMax:
+        placarMax = placar1
+        quebraRecMax = quebraRecMax+1
+        placarMin = placarMin
+    elif placar1 < placarMin:
+        placarMin = placar1
+        quebraRecMin = quebraRecMin+ 1
     else:
-        placarMin = placarMin 
+        quebraRecMin = quebraRecMin+ 0 
+        quebraRecMmax =quebraRecMax+ 0     
 
 
+   
     jogo = Jogo.objects.create(idJogo=idJogo,placar=placar,placarMin=placarMin,placarMax=placarMax,quebraRecMin=quebraRecMin,quebraRecMax=quebraRecMax)
-
+    jogo.save()
+    
     return redirect('/')   
