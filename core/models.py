@@ -1,5 +1,6 @@
 from django.db import models
 
+#criação da classe com os atributos
 class Jogo(models.Model):
     idJogo = models.AutoField(primary_key=True)
     placar = models.IntegerField()

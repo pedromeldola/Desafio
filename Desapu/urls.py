@@ -19,6 +19,6 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.home_page),
-    path('submit',views.inserir)
+    path('',views.home_page), #função para chamar o método home_page quando não digitado nada após o url
+    path('submit',views.inserir) #função para chamar o método inserir quando o botão de inserir for acionado 
 ]
