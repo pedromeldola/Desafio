@@ -19,7 +19,6 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('consulta/', views.consultar),
     path('',views.home_page),
     path('submit',views.inserir)
 ]
